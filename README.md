@@ -14,6 +14,7 @@ Download the [production version][min] or the [development version][max].
 In your web page:
 
 ```html
+<link rel="stylesheet" href="css/jquery.formit.css">
 <script src="jquery.js"></script>
 <script src="dist/jquery.formit.min.js"></script>
 <script>
