@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="formIt : A jQuery plugin for custom form elements." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>formIt</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/mindgruve/formit">View on GitHub</a>
+
+          <h1 id="project_title">formIt</h1>
+          <h2 id="project_tagline">A jQuery plugin for custom form elements.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/mindgruve/formit/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/mindgruve/formit/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>formIt</h1>
+
+<p>A jQuery plugin for custom form elements.</p>
+
+<p>Built by <a href="http://ckihneman.github.com/">Chris Kihneman</a> at <a href="http://mindgruve.com/">Mindgruve</a>.</p>
+
+<h2>Getting Started</h2>
+
+<p>Download the <a href="https://raw.github.com/mindgruve/formit/master/dist/jquery.formit.min.js">production version</a> or the <a href="https://raw.github.com/mindgruve/formit/master/dist/jquery.formit.js">development version</a>.</p>
+
+<p>In your web page:</p>
+
+<div class="highlight"><pre><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"css/jquery.formit.css"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"jquery.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"dist/jquery.formit.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="c1">// IIFE for good measure.</span>
+<span class="p">(</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">$</span> <span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// Setup your defaults (if they are global).</span>
+    <span class="c1">// Not needed if you just override the existing styles</span>
+    <span class="c1">// in `css/jquery.formit.css`.</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">formIt</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">checkboxHtml</span> <span class="o">=</span> <span class="s1">'&lt;span class="ss-icon"&gt;&amp;#x2713;&lt;/span&gt;'</span><span class="p">;</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">formIt</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">radioHtml</span> <span class="o">=</span> <span class="s1">'&lt;div class="my-inner"&gt;&lt;/div&gt;'</span><span class="p">;</span>
+
+    <span class="c1">// A span is required for selects and files</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">formIt</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">selectHtml</span> <span class="o">=</span> <span class="s1">'&lt;span&gt;&lt;/span&gt;&lt;div class="my-arrow-wrap"&gt;&lt;div class="my-arrow"&gt;&lt;/div&gt;&lt;/div&gt;'</span><span class="p">;</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">formIt</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">fileHtml</span> <span class="o">=</span> <span class="s1">'&lt;span&gt;Choose a file...&lt;/span&gt;&lt;div class="my-button"&gt;&lt;div class="my-inner-button"&gt;Browse&lt;/div&gt;&lt;/div&gt;'</span><span class="p">;</span>
+
+    <span class="c1">// On ready.</span>
+    <span class="nx">$</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+
+        <span class="c1">// Run formIt.</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">formIt</span><span class="p">();</span>
+    <span class="p">});</span>
+
+<span class="p">})(</span> <span class="nx">jQuery</span> <span class="p">);</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<h2>Documentation</h2>
+
+<p><em>(Coming soon)</em></p>
+
+<h2>Examples</h2>
+
+<p>For now, see <code>demos/index.html</code>.</p>
+
+<h2>Release History</h2>
+
+<ul>
+<li>2012/11/16 - v0.1.0 - Initial release.</li>
+</ul>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">formIt maintained by <a href="https://github.com/mindgruve">mindgruve</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
