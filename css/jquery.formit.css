@@ -12,13 +12,11 @@
 	box-sizing: border-box;
 	padding: 0;
 	*width: 18px;
-	*height: 17px;
+	*height: 18px;
 }
 
 /* Hide these elements once they are styled */
-.fi-file-wrap .fi-styled,
-.fi-checkbox .fi-styled,
-.fi-radio .fi-styled {
+.fi-file-wrap .fi-styled {
 	display: none !important;
 	visibility: hidden;
 }
@@ -113,6 +111,16 @@
 /* ==========================================================================
    CHECKBOXES AND RADIO BUTTONS
    ========================================================================== */
+.fi-checkbox .fi-styled,
+.fi-radio .fi-styled {
+	position: relative;
+	margin: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	cursor: pointer;
+}
+
 .fi-checkbox,
 .fi-radio {
 	background-color: #ddd;
