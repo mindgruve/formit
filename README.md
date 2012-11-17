@@ -2,6 +2,8 @@
 
 A jQuery plugin for custom form elements.
 
+Built by [Chris Kihneman](http://ckihneman.github.com/) at [Mindgruve](http://mindgruve.com/).
+
 ## Getting Started
 
 Download the [production version][min] or the [development version][max].
@@ -45,8 +47,8 @@ _(Coming soon)_
 
 ## Examples
 
-_(Coming soon)_
+For now, see `demos/index.html`.
 
 ## Release History
 
-_(Nothing yet)_
+* 2012/11/16 - v0.1.0 - Initial release.
