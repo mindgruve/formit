@@ -30,28 +30,26 @@ var
         }
 
         if ( !isDisabled ) {
-            $el.on( 'click.formit', this.clickHandler );
+            $input.on( 'change.formit', this.changeHandler );
         }
-
         $input
             .after( $el )
             .appendTo( $el );
     },
 
     checkboxRadioRemove = function( $input ) {
-        $input.parent().off( '.formit' ).remove();
+        $input.off( '.formit' ).parent().remove();
     };
 
 // Types
 
 // Checkbox
 types.checkbox = {
-    clickHandler : function() {
-        var $el = $( this ),
-            $checkbox = $el.find( 'input' ),
-            isChecked = $el.hasClass( 'checked' );
-        $el[ (isChecked ? 'remove' : 'add') + 'Class' ]( 'checked' );
-        $checkbox.prop( 'checked', !isChecked );
+    changeHandler : function() {
+        var $input = $( this ),
+            $el = $input.parent(),
+            isChecked = $input.prop( 'checked' );
+        $el[ (isChecked ? 'add' : 'remove') + 'Class' ]( 'checked' );
     },
     setUp : checkboxRadioSetUp,
     remove : checkboxRadioRemove
@@ -59,17 +57,12 @@ types.checkbox = {
 
 // Radio
 types.radio = {
-    clickHandler : function() {
-        var $el = $( this ),
-            $radio, name;
-        if ( $el.hasClass( 'checked' ) ) {
-            return;
-        }
-        $radio = $el.find( 'input' );
-        name = $radio.attr( 'name' );
-        $( 'input[name="' + name + '"]' ).parent( '.checked' ).removeClass( 'checked' );
+    changeHandler : function() {
+        var $input = $( this ),
+            $el = $input.parent(),
+            isChecked = $input.prop( 'checked' );
+        $( 'input[name="' + $input.attr( 'name' ) + '"]' ).parent( '.checked' ).removeClass( 'checked' );
         $el.addClass( 'checked' );
-        $radio.prop( 'checked', true );
     },
     setUp : checkboxRadioSetUp,
     remove : checkboxRadioRemove
