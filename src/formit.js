@@ -2,7 +2,7 @@
  * formIt
  * https://github.com/mindgruve/formit
  *
- * Copyright (c) 2012 Chris Kihneman | Mindgruve
+ * Copyright (c) 2013 Chris Kihneman | Mindgruve
  * Licensed under the MIT license.
  */
 
