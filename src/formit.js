@@ -59,8 +59,7 @@ types.checkbox = {
 types.radio = {
     changeHandler : function() {
         var $input = $( this ),
-            $el = $input.parent(),
-            isChecked = $input.prop( 'checked' );
+            $el = $input.parent();
         $( 'input[name="' + $input.attr( 'name' ) + '"]' ).parent( '.checked' ).removeClass( 'checked' );
         $el.addClass( 'checked' );
     },
