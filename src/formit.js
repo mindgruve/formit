@@ -94,7 +94,7 @@ types.file = {
         text = text ? text.replace(/C:\\fakepath\\/i, '') : '&nbsp;';
         $file.parent().find( 'span' ).html( text );
     },
-    clickHandler : function( e ) {
+    clickHandler : function() {
         $( this ).siblings( 'input' )[0].click();
     },
     setUp : function( $input, $el ) {
