@@ -78,8 +78,8 @@ types.select = {
         $input
             .on( 'change.formit', this.changeHandler )
             .after( $el )
-            .appendTo( $el )
-            .trigger( 'change' );
+            .appendTo( $el );
+        this.changeHandler.call( $input );
     },
     remove : function( $input ) {
         $input.off( '.formit' ).parent().remove();
