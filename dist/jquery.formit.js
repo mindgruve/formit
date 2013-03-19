@@ -1,7 +1,6 @@
-/* formIt - v0.1.0 - 2012-11-16
- * https://github.com/mindgruve/formit
- * Copyright (c) 2012 Chris Kihneman | Mindgruve; Licensed MIT */
-
+/*! formIt - v0.1.0 - 2013-03-18
+* https://github.com/mindgruve/formit
+* Copyright (c) 2013 Chris Kihneman | Mindgruve; Licensed MIT */
 ( function( $ ) {
 var
     lastOptions,
@@ -55,8 +54,7 @@ types.checkbox = {
 types.radio = {
     changeHandler : function() {
         var $input = $( this ),
-            $el = $input.parent(),
-            isChecked = $input.prop( 'checked' );
+            $el = $input.parent();
         $( 'input[name="' + $input.attr( 'name' ) + '"]' ).parent( '.checked' ).removeClass( 'checked' );
         $el.addClass( 'checked' );
     },
@@ -75,8 +73,8 @@ types.select = {
         $input
             .on( 'change.formit', this.changeHandler )
             .after( $el )
-            .appendTo( $el )
-            .trigger( 'change' );
+            .appendTo( $el );
+        this.changeHandler.call( $input );
     },
     remove : function( $input ) {
         $input.off( '.formit' ).parent().remove();
@@ -91,7 +89,7 @@ types.file = {
         text = text ? text.replace(/C:\\fakepath\\/i, '') : '&nbsp;';
         $file.parent().find( 'span' ).html( text );
     },
-    clickHandler : function( e ) {
+    clickHandler : function() {
         $( this ).siblings( 'input' )[0].click();
     },
     setUp : function( $input, $el ) {
