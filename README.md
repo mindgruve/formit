@@ -52,4 +52,5 @@ For now, see `demos/index.html`.
 
 ## Release History
 
+* 2013/03/18 - v0.1.1 - Manually call change handler on selects on set up instead of triggering `change` with jQuery. Update grunt to 0.4.1.
 * 2012/11/16 - v0.1.0 - Initial release.
