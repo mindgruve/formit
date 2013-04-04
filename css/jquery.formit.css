@@ -21,6 +21,10 @@
 	visibility: hidden;
 }
 
+.fi-focus {
+	box-shadow: 0 0 3px #aaa;
+}
+
 
 /* ==========================================================================
    SELECT MENUS AND FILE INPUTS
