@@ -76,7 +76,7 @@ types.select = {
     },
     setUp : function( $input, $el ) {
         $input
-            .on( 'change.formit', this.changeHandler )
+            .on( 'change.formit keyup.formit', this.changeHandler )
             .after( $el )
             .appendTo( $el );
         this.changeHandler.call( $input );
