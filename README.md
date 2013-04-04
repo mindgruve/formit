@@ -52,5 +52,8 @@ For now, see `demos/index.html`.
 
 ## Release History
 
+* 2013/04/04 - v0.1.2 - Enhancements for power users that navigate forms with their keyboard.
+    * Fire change handler on selects on keyup.
+    * Add class `fi-focus` to form elements wrapper that have focus.
 * 2013/03/18 - v0.1.1 - Manually call change handler on selects on set up instead of triggering `change` with jQuery. Update grunt to 0.4.1.
 * 2012/11/16 - v0.1.0 - Initial release.

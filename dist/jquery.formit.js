@@ -1,4 +1,4 @@
-/*! formIt - v0.1.1 - 2013-03-18
+/*! formIt - v0.1.2 - 2013-04-04
 * https://github.com/mindgruve/formit
 * Copyright (c) 2013 Chris Kihneman | Mindgruve; Licensed MIT */
 ( function( $ ) {
@@ -29,11 +29,17 @@ var
         }
         $input
             .after( $el )
-            .appendTo( $el );
+            .appendTo( $el )
+            .on( 'focus.formit blur.formit', focusBlurHandler );
     },
 
     checkboxRadioRemove = function( $input ) {
         $input.off( '.formit' ).parent().remove();
+    },
+
+    focusBlurHandler = function( e ) {
+        var prefix = e.type === 'focus' ? 'add' : 'remove';
+        $( this ).parent()[ prefix + 'Class' ]( 'fi-focus' );
     };
 
 // Types
@@ -71,7 +77,8 @@ types.select = {
     },
     setUp : function( $input, $el ) {
         $input
-            .on( 'change.formit', this.changeHandler )
+            .on( 'change.formit keyup.formit', this.changeHandler )
+            .on( 'focus.formit blur.formit', focusBlurHandler )
             .after( $el )
             .appendTo( $el );
         this.changeHandler.call( $input );
@@ -100,6 +107,7 @@ types.file = {
 
         $input
             .on( 'change.formit', this.changeHandler )
+            .on( 'focus.formit blur.formit', focusBlurHandler )
             .after( $wrap )
             .appendTo( $wrap );
     },
