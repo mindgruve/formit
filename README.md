@@ -44,7 +44,39 @@ In your web page:
 
 ## Documentation
 
-_(Coming soon)_
+formIt works a bit differently than your other normal jQuery plugin that is built off of its prototype, `$.fn`. This plugin is attached to directly to the jQuery object, `$`. It is meant to just be called, as you really need your forms just styled. You don't have to think about the selectors, or accidentally leave something out. Just call `$.formIt()` and you will have custom form elements, assuming you have included the `jquery.formit.css`.
+
+Note: Multi-selects are not supported. Nor is support planned at this moment.
+
+### Options
+
+`chexbox`, `radio`, `select`, `file` (default `true`) enable or disable form elements from being processed by formIt.
+
+`checkboxSelector`, `radioSelector`, `selectSelector`, `fileSelector` (defaults to native element selector) change the selector for your needs, but by default, it will find all style-able elements.
+
+`checkboxHtml`, `radioHtml`, `selectHtml`, `fileHtml` (defaults to native element selector) change the html for the mocked elements built by formIt. This allows you to add css classes as needed and go to town on styling that awesome css triangle or adding an icon, or whatever.
+
+Here are the defaults taken directly from the source code.
+
+    $.formIt.defaults = {
+
+        checkbox : true,
+        checkboxSelector : 'input[type="checkbox"]',
+        checkboxHtml : '<div></div>',
+
+        radio : true,
+        radioSelector : 'input[type="radio"]',
+        radioHtml : '<div></div>',
+
+        select : true,
+        selectSelector : 'select',
+        selectHtml : '<span></span><div class="fi-select-arrow-wrap"><div class="fi-select-arrow"></div></div>',
+
+        file : true,
+        fileSelector : 'input[type="file"]',
+        fileHtml : '<span>Choose a file...</span><div class="fi-file-button"><div class="fi-file-button-inner">Browse</div></div>'
+
+    };
 
 ## Examples
 
