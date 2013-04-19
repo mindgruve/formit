@@ -81,8 +81,12 @@ types.select = {
         $select.siblings( 'span' ).html( text );
     },
     setUp : function( $input, $el ) {
+        if ( $input.attr( 'disabled' ) ) {
+            $el.addClass( 'disabled' );
+        } else {
+            $input.on( 'change.formit keyup.formit', this.changeHandler );
+        }
         $input
-            .on( 'change.formit keyup.formit', this.changeHandler )
             .on( 'focus.formit blur.formit', focusBlurHandler )
             .after( $el )
             .appendTo( $el );
