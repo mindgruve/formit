@@ -158,6 +158,7 @@
 	display: block;
 }
 
+.fi-select.disabled,
 .fi-checkbox.disabled,
 .fi-radio.disabled {
 	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
