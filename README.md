@@ -84,6 +84,7 @@ For now, see `demos/index.html`.
 
 ## Release History
 
+* 2013/04/19 - v0.1.3 - Add handling for disabled selects on setup.
 * 2013/04/04 - v0.1.2 - Enhancements for power users that navigate forms with their keyboard.
     * Fire change handler on selects on keyup.
     * Add class `fi-focus` to form elements wrapper that have focus.

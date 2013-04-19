@@ -1,4 +1,4 @@
-/*! formIt - v0.1.2 - 2013-04-04
+/*! formIt - v0.1.3 - 2013-04-19
 * https://github.com/mindgruve/formit
 * Copyright (c) 2013 Chris Kihneman | Mindgruve; Licensed MIT */
 ( function( $ ) {
@@ -76,8 +76,12 @@ types.select = {
         $select.siblings( 'span' ).html( text );
     },
     setUp : function( $input, $el ) {
+        if ( $input.attr( 'disabled' ) ) {
+            $el.addClass( 'disabled' );
+        } else {
+            $input.on( 'change.formit keyup.formit', this.changeHandler );
+        }
         $input
-            .on( 'change.formit keyup.formit', this.changeHandler )
             .on( 'focus.formit blur.formit', focusBlurHandler )
             .after( $el )
             .appendTo( $el );
