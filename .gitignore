@@ -1,3 +1,4 @@
 # Ignore until I write tests...
 /test/*
 /libs/qunit/*
+/_project
