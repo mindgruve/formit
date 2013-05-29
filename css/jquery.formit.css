@@ -44,6 +44,7 @@
 	-webkit-appearance: none;
 }
 
+select[multiple],
 .fi-select,
 .fi-file {
 	color: #444;
@@ -57,6 +58,10 @@
 	-moz-background-clip: padding;
 	-webkit-background-clip: padding-box;
 	background-clip: padding-box;
+}
+
+select[multiple] {
+	padding: 5px;
 }
 
 .fi-select span,
