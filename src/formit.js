@@ -208,7 +208,7 @@ $.formIt.defaults = {
     radioHtml : '<div></div>',
 
     select : true,
-    selectSelector : 'select',
+    selectSelector : 'select:not([multiple])',
     selectHtml : '<span></span><div class="fi-select-arrow-wrap"><div class="fi-select-arrow"></div></div>',
 
     file : true,
