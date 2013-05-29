@@ -1,4 +1,4 @@
-/*! formIt - v0.1.3 - 2013-04-19
+/*! formIt - v0.1.4 - 2013-05-29
 * https://github.com/mindgruve/formit
 * Copyright (c) 2013 Chris Kihneman | Mindgruve; Licensed MIT */
 ( function( $ ) {
@@ -203,7 +203,7 @@ $.formIt.defaults = {
     radioHtml : '<div></div>',
 
     select : true,
-    selectSelector : 'select',
+    selectSelector : 'select:not([multiple])',
     selectHtml : '<span></span><div class="fi-select-arrow-wrap"><div class="fi-select-arrow"></div></div>',
 
     file : true,

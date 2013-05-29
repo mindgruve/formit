@@ -84,6 +84,8 @@ For now, see `demos/index.html`.
 
 ## Release History
 
+* 2013/05/29 - v0.1.4 - Update select selector to exclude multiple selects.
+    * Add styles for multiple selects.
 * 2013/04/19 - v0.1.3 - Add handling for disabled selects on setup.
 * 2013/04/04 - v0.1.2 - Enhancements for power users that navigate forms with their keyboard.
     * Fire change handler on selects on keyup.
