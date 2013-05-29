@@ -19,6 +19,11 @@
         body {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
         }
+        body {
+            width: 900px;
+            margin: 0 auto;
+            padding: 0 10px 10px;
+        }
     </style>
 </head>
 <body>
@@ -104,6 +109,16 @@
     <h2>Select Disabled</h2>
     <p>
         <select name="select-disabled-test" disabled>
+            <option value="1">Option 1</option>
+            <option value="2">Another option</option>
+            <option value="3">Option three</option>
+            <option value="4">Something random</option>
+        </select>
+    </p>
+
+    <h2>Mutliple Select <small>(skipped, css only)</small></h2>
+    <p>
+        <select name="multi-select-test" multiple>
             <option value="1">Option 1</option>
             <option value="2">Another option</option>
             <option value="3">Option three</option>
