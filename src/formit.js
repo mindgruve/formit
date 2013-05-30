@@ -35,7 +35,12 @@ var
         $input
             .after( $el )
             .appendTo( $el )
-            .on( 'focus.formit blur.formit', focusBlurHandler );
+            .on( 'focus.formit blur.formit', focusBlurHandler )
+            .on( 'click.formit', checkboxRadioClick );
+    },
+
+    checkboxRadioClick = function() {
+        $( this ).trigger( 'focus' );
     },
 
     checkboxRadioRemove = function( $input ) {
