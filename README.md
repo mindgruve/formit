@@ -92,6 +92,9 @@ For now, see `demos/index.html`.
 
 ## Release History
 
+* 2013/05/30 - v0.1.5 - Trigger focus event on checkbox and radio clicks so focus styles are shown.
+    * Add styles for multiple select focus event.
+    * Update docs about mutli-selects and focus events.
 * 2013/05/29 - v0.1.4 - Update select selector to exclude multiple selects.
     * Add styles for multiple selects.
 * 2013/04/19 - v0.1.3 - Add handling for disabled selects on setup.

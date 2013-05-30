@@ -1,4 +1,4 @@
-/*! formIt - v0.1.4 - 2013-05-29
+/*! formIt - v0.1.5 - 2013-05-30
 * https://github.com/mindgruve/formit
 * Copyright (c) 2013 Chris Kihneman | Mindgruve; Licensed MIT */
 ( function( $ ) {
@@ -30,7 +30,12 @@ var
         $input
             .after( $el )
             .appendTo( $el )
-            .on( 'focus.formit blur.formit', focusBlurHandler );
+            .on( 'focus.formit blur.formit', focusBlurHandler )
+            .on( 'click.formit', checkboxRadioClick );
+    },
+
+    checkboxRadioClick = function() {
+        $( this ).trigger( 'focus' );
     },
 
     checkboxRadioRemove = function( $input ) {
