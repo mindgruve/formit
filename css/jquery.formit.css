@@ -21,6 +21,7 @@
 	visibility: hidden;
 }
 
+select[multiple]:focus,
 .fi-focus {
 	box-shadow: 0 0 3px #aaa;
 }
@@ -62,6 +63,9 @@ select[multiple],
 
 select[multiple] {
 	padding: 5px;
+}
+select[multiple]:focus {
+	outline: none;
 }
 
 .fi-select span,
