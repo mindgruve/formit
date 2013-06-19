@@ -68,6 +68,17 @@ module.exports = function(grunt) {
         tasks: ['jshint:test', 'qunit']
       },
     },
+    cssmin: {
+      minify: {
+        options: {
+          banner: '<%= banner %>',
+          report : 'gzip'
+        },
+        files : {
+          'css/jquery.<%= pkg.name %>.min.css': ['css/jquery.<%= pkg.name %>.css']
+        }
+      }
+    },
   });
 
   // These plugins provide necessary tasks.
@@ -75,9 +86,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
   // Default task.
   // grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']); // ...someday
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'cssmin']);
 
 };
