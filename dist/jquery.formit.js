@@ -1,4 +1,4 @@
-/*! formIt - v0.1.5 - 2013-05-30
+/*! formIt - v0.1.6 - 2013-06-19
 * https://github.com/mindgruve/formit
 * Copyright (c) 2013 Chris Kihneman | Mindgruve; Licensed MIT */
 ( function( $ ) {
