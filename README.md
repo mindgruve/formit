@@ -4,6 +4,8 @@ A jQuery plugin for custom form elements.
 
 Built by [Chris Kihneman](http://ckihneman.github.com/) at [Mindgruve](http://mindgruve.com/).
 
+Updates by [Abishai Gray](http://abishaigray.com) at [Mindgruve](http://mindgruve.com/).
+
 ## Getting Started
 
 Download the [production version][min] or the [development version][max].
