@@ -1,18 +1,42 @@
 {
-  "name": "jquery-plugin",
-  "version": "0.0.0-ignored",
+  "name": "formit",
+  "title": "formIt",
+  "description": "A jQuery plugin for custom form elements.",
+  "version": "3.2.0",
+  "homepage": "https://github.com/mindgruve/formit",
+  "contributors": [
+    {
+      "name": "Chris Kihneman",
+      "email": "ckihneman@mindgruve.com",
+      "company": "Mindgruve"
+    },
+    {
+      "name": "Abishai Gray",
+      "email": "agray@abishaigray.com",
+      "url": "http://abishaigray.com/"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/mindgruve/formit/issues"
+  },
+  "license": "MIT",
   "engines": {
     "node": ">= 0.6.0"
   },
   "scripts": {
-    "test": "grunt qunit"
+    "test": "grunt qunit",
+    "build-js": "grunt"
+  },
+  "dependencies": {
+	  "jquery": "~1.7.0"
   },
   "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-concat": "~0.1.0",
+    "grunt-contrib-cssmin": "~0.6.1",
     "grunt-contrib-jshint": "~0.1.0",
     "grunt-contrib-qunit": "~0.1.0",
-    "grunt-contrib-concat": "~0.1.0",
-    "grunt-contrib-uglify": "~0.1.0",
-    "grunt": "~0.4.1",
-    "grunt-contrib-cssmin": "~0.6.1"
+    "grunt-contrib-uglify": "~0.1.0"
   }
 }

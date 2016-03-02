@@ -2,9 +2,7 @@
 
 A jQuery plugin for custom form elements.
 
-Built by [Chris Kihneman](http://ckihneman.github.com/) at [Mindgruve](http://mindgruve.com/).
-
-Updates by [Abishai Gray](http://abishaigray.com) at [Mindgruve](http://mindgruve.com/).
+Built by [Chris Kihneman](http://ckihneman.github.com/) and  [Abishai Gray](http://abishaigray.com) at [Mindgruve](http://mindgruve.com/).
 
 ## Getting Started
 
@@ -23,21 +21,12 @@ In your web page:
 // IIFE for good measure.
 ( function( $ ) {
 
-    // Setup your defaults (if they are global).
-    // Not needed if you just override the existing styles
-    // in `css/jquery.formit.css`.
-    $.formIt.defaults.checkboxHtml = '<span class="ss-icon">&#x2713;</span>';
-    $.formIt.defaults.radioHtml = '<div class="my-inner"></div>';
-
-    // A span is required for selects and files
-    $.formIt.defaults.selectHtml = '<span></span><div class="my-arrow-wrap"><div class="my-arrow"></div></div>';
-    $.formIt.defaults.fileHtml = '<span>Choose a file...</span><div class="my-button"><div class="my-inner-button">Browse</div></div>';
-
     // On ready.
-    $( function() {
-
+    $(function () {
+		
         // Run formIt.
         $.formIt();
+		
     });
 
 })( jQuery );

@@ -1,225 +1,263 @@
 /*
- * formIt
- * https://github.com/mindgruve/formit
  *
- * Copyright (c) 2013 Chris Kihneman | Mindgruve
  * Licensed under the MIT license.
  */
+(function (root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], function (jQuery) {
+            // Also create a global in case some scripts
+            // that are loaded still are looking for
+            // a global even when an AMD loader is in use.
+            return (root.formIt = factory(jQuery));
+        });
+    } else {
+        // Browser globals
+        root.formIt = factory(root.jQuery);
+    }
+}(this, function ($) {
 
-( function( $ ) {
-var
-    lastOptions,
-
-    types = {},
-    methods = {},
-    internal = {},
+    var
+        lastOptions,
+        types = {},
+        methods = {},
+        internal = {},
 
     // Helpers
-    checkboxRadioSetUp = function( $input, $el ) {
-        var isDisabled = $input.attr( 'disabled' ),
-            classes = '';
+        checkboxRadioSetUp = function ($input, $el) {
+            var isChecked = $input.prop('checked'),
+                isDisabled = $input.attr('disabled'),
+                classes = '';
 
-        if ( $input.prop('checked') ) {
-            classes += 'checked ';
-        }
-        if ( isDisabled ) {
-            classes += 'disabled';
-        }
-        if ( classes ) {
-            $el.addClass( classes );
-        }
+            if (isChecked) {
+                classes += 'checked ';
+            }
+            if (isDisabled) {
+                classes += 'disabled';
+            }
+            if (classes) {
+                $el.addClass(classes);
+            }
 
-        if ( !isDisabled ) {
-            $input.on( 'change.formit', this.changeHandler );
-        }
-        $input
-            .after( $el )
-            .appendTo( $el )
-            .on( 'focus.formit blur.formit', focusBlurHandler )
-            .on( 'click.formit', checkboxRadioClick );
-    },
+            $input
+                .after($el)//put the HTML on the dom
+                .appendTo($el)//move the input into the $el
+                .on('focus.formit blur.formit', focusBlurHandler)
+                .on('click.formit', function () {$(this).trigger('focus');})
+                .on('change.formit', this.changeHandler);
 
-    checkboxRadioClick = function() {
-        $( this ).trigger( 'focus' );
-    },
+        },
 
-    checkboxRadioRemove = function( $input ) {
-        $input.off( '.formit' ).parent().remove();
-    },
+        checkboxRadioRemove = function ($input) {
+            $input.off('.formit').parent().remove();
+        },
 
-    focusBlurHandler = function( e ) {
-        var prefix = e.type === 'focus' ? 'add' : 'remove';
-        $( this ).parent()[ prefix + 'Class' ]( 'fi-focus' );
-    };
+        focusBlurHandler = function (e) {
+            var prefix = e.type === 'focus' ? 'add' : 'remove';
+            $(this).parent()[ prefix + 'Class' ]('fi-focus');
+        },
+
+        selectSetUp = function ($input, $el) {
+            if ($input.attr('disabled')) {
+                $el.addClass('disabled');
+            }
+            $input
+                .after($el)
+                .appendTo($el)
+                .on('focus.formit blur.formit', focusBlurHandler)
+                .on('change.formit keyup.formit', this.changeHandler);
+            this.changeHandler.call($input);
+        },
+
+        fileSetUp = function ($input, $el) {
+            var $wrap = $('<div/>', { 'class': 'fi-file-wrap' });
+            $el
+                .appendTo($wrap)
+                .on('click.formit', this.clickHandler);
+
+            $input
+                .after($wrap)
+                .appendTo($wrap)
+                .on('change.formit', this.changeHandler)
+                .on('focus.formit blur.formit', focusBlurHandler);
+            this.changeHandler.call($input);
+        };
 
 // Types
 
 // Checkbox
-types.checkbox = {
-    changeHandler : function() {
-        var $input = $( this ),
-            $el = $input.parent(),
-            isChecked = $input.prop( 'checked' );
-        $el[ (isChecked ? 'add' : 'remove') + 'Class' ]( 'checked' );
-    },
-    setUp : checkboxRadioSetUp,
-    remove : checkboxRadioRemove
-};
+    types.checkbox = {
+        changeHandler: function () {
+            // console.log('check change');
+            var $input = $(this),
+                $el = $input.parent(),
+                isChecked = $input.prop('checked');
+            $el[ (isChecked ? 'add' : 'remove') + 'Class' ]('checked');
+        },
+        setUp: checkboxRadioSetUp,
+        remove: checkboxRadioRemove
+    };
 
 // Radio
-types.radio = {
-    changeHandler : function() {
-        var $input = $( this ),
-            $el = $input.parent();
-        $( 'input[name="' + $input.attr( 'name' ) + '"]' ).parent( '.checked' ).removeClass( 'checked' );
-        $el.addClass( 'checked' );
-    },
-    setUp : checkboxRadioSetUp,
-    remove : checkboxRadioRemove
-};
+    types.radio = {
+        changeHandler: function () {
+            var $input = $(this),
+                $el = $input.parent();
+            $('input[name="' + $input.attr('name') + '"]').parent('.checked').removeClass('checked');
+            $el.addClass('checked');
+        },
+        setUp: checkboxRadioSetUp,
+        remove: checkboxRadioRemove
+    };
 
 // Select
-types.select = {
-    changeHandler : function() {
-        var $select = $( this ),
-            text = $select.find( ':selected' ).text() || '&nbsp;';
-        $select.siblings( 'span' ).html( text );
-    },
-    setUp : function( $input, $el ) {
-        if ( $input.attr( 'disabled' ) ) {
-            $el.addClass( 'disabled' );
-        } else {
-            $input.on( 'change.formit keyup.formit', this.changeHandler );
+    types.select = {
+        changeHandler: function () {
+            var $select = $(this),
+                data = {
+                    text : $select.find(':selected').text() || '&nbsp;',
+                    value: $select.val()
+                },
+                isDisabled = $select.hasClass('disabled');
+            if (!isDisabled) {
+                $select.trigger('updateText', [data]);
+                $select.siblings('span').html(data.text);
+            }
+        },
+        setUp: selectSetUp,
+        remove: function ($input) {
+            $input.off('.formit').parent().remove();
         }
-        $input
-            .on( 'focus.formit blur.formit', focusBlurHandler )
-            .after( $el )
-            .appendTo( $el );
-        this.changeHandler.call( $input );
-    },
-    remove : function( $input ) {
-        $input.off( '.formit' ).parent().remove();
-    }
-};
+    };
 
 // File
-types.file = {
-    changeHandler : function() {
-        var $file = $( this ),
-            text = $file.val();
-        text = text ? text.replace(/C:\\fakepath\\/i, '') : '&nbsp;';
-        $file.parent().find( 'span' ).html( text );
-    },
-    clickHandler : function() {
-        $( this ).siblings( 'input' )[0].click();
-    },
-    setUp : function( $input, $el ) {
-        var $wrap = $( '<div/>', { 'class' : 'fi-file-wrap' });
-        $el
-            .on( 'click.formit', this.clickHandler )
-            .appendTo( $wrap );
-
-        $input
-            .on( 'change.formit', this.changeHandler )
-            .on( 'focus.formit blur.formit', focusBlurHandler )
-            .after( $wrap )
-            .appendTo( $wrap );
-    },
-    remove : function( $input ) {
-        $input.off( '.formit' ).siblings().off( '.formit' ).parent().remove();
-    }
-};
-
-// Main initialize function
-methods.init = function( options ) {
-    options = $.extend( {}, $.formIt.defaults, options );
-    for ( var typeName in types ) {
-        var type = types[ typeName ], $els;
-        if ( !options[ typeName ] ) {
-            continue;
+    types.file = {
+        changeHandler: function () {
+            var $file = $(this);
+            var data = {
+                text: $file.val(),
+                value: $file.val()
+            };
+            data.text = data.text ? data.text.replace(/C:\\fakepath\\/i, '') : '&nbsp;';
+            $file.trigger('updateText', [data]);
+            $file.parent().find('span').html(data.text);
+        },
+        clickHandler: function () {
+            $(this).siblings('input')[0].click();
+        },
+        setUp: fileSetUp,
+        remove: function ($input) {
+            $input
+                .off('.formit')
+                .siblings()
+                    .off('.formit')
+                    .parent()
+                        .remove();
         }
-        $els = $( options[ typeName + 'Selector' ] );
-        if ( $els.length ) {
-            internal.initType( $els, typeName, type, options[ typeName + 'Html' ] );
-        }
-    }
-    lastOptions = options;
-};
+    };
 
-internal.initType = function( $els, typeName, type, html ) {
-    $els.each( function() {
-        var $input = $( this ), $el;
-        if ( $input.hasClass('fi-styled') ) {
-            return;
+    // Main initialize function
+    methods.init = function (options) {
+        options = $.extend({}, formIt.defaults, options);
+        for (var typeName in types) {
+            var type = types[ typeName ], $els;
+            if (!options[ typeName ]) {
+                continue;
+            }
+            $els = $(options[ typeName + 'Selector' ], options.context);
+            if ($els.length) {
+                internal.initType($els, typeName, type, options[ typeName + 'Html' ]);
+            }
         }
-        $el = $( '<div/>', { 'class' : 'fi-' + typeName })
-            .html( html );
-        type.setUp( $input.addClass('fi-styled'), $el );
-    });
-};
+        lastOptions = options;
+    };
+
+    internal.initType = function ($els, typeName, type, html) {
+        $els.each(function () {
+            var $input = $(this), $el;
+            if ($input.hasClass('fi-styled')) {
+                return;
+            }
+            var $html = $(html);
+            if (typeName === 'radio' || typeName === 'checkbox') {
+                $html.first().addClass('fi-check');
+            }
+            $el = $('<div />', { 'class': 'fi-' + typeName }).append($html);
+            type.setUp($input.addClass('fi-styled'), $el);
+        });
+    };
 
 // Remove elements
-methods.remove = function( $context ) {
-    if ( !lastOptions ) {
-        return;
-    }
-    for ( var typeName in types ) {
-        var type = types[ typeName ], $els, selector;
-        if ( !lastOptions[ typeName ] ) {
-            continue;
-        }
-        selector = lastOptions[ typeName + 'Selector' ];
-        if ( $context && $context.length ) {
-            $els = $context.find( selector );
-        } else {
-            $els = $( selector );
-        }
-        if ( $els.length ) {
-            internal.removeType( $els, type );
-        }
-    }
-};
-
-internal.removeType = function( $els, type ) {
-    $els.each( function() {
-        var $input = $( this );
-        if ( !$input.hasClass('fi-styled') ) {
+    methods.remove = function ($context) {
+        if (!lastOptions) {
             return;
         }
-        if ( type.remove ) {
-            type.remove( $input );
+        for (var typeName in types) {
+            var type = types[ typeName ], $els, selector;
+            if (!lastOptions[ typeName ]) {
+                continue;
+            }
+            selector = lastOptions[ typeName + 'Selector' ];
+            if ($context && $context.length) {
+                $els = $context.find(selector);
+            } else {
+                $els = $(selector);
+            }
+            if ($els.length) {
+                internal.removeType($els, type);
+            }
         }
-    });
-};
+    };
 
-$.formIt = function( method ) {
-    if ( methods[ method ] ) {
-        methods[ method ].apply( this, Array.prototype.slice.call(arguments, 1) );
-    } else if ( typeof method === 'object' || !method ) {
-        methods.init.apply( this, arguments );
-    } else {
-        $.error( 'Method ' +  method + ' does not exist on jQuery.formIt' );
+    internal.removeType = function ($els, type) {
+        $els.each(function () {
+            var $input = $(this);
+            if (!$input.hasClass('fi-styled')) {
+                return;
+            }
+            if (type.remove) {
+                type.remove($input);
+            }
+        });
+    };
+
+    function formIt (method) {
+        if (methods[ method ]) {
+            methods[ method ].apply(this, Array.prototype.slice.call(arguments, 1));
+        } else if (typeof method === 'object' || !method) {
+            methods.init.apply(this, arguments);
+        } else {
+            $.error('Method ' + method + ' does not exist on jQuery.formIt');
+        }
     }
-};
 
-$.formIt.defaults = {
+    formIt.getLastOptions = function () {
+        return lastOptions;
+    };
 
-    checkbox : true,
-    checkboxSelector : 'input[type="checkbox"]',
-    checkboxHtml : '<div></div>',
+    formIt.defaults = {
 
-    radio : true,
-    radioSelector : 'input[type="radio"]',
-    radioHtml : '<div></div>',
+        context: document,
 
-    select : true,
-    selectSelector : 'select:not([multiple])',
-    selectHtml : '<span></span><div class="fi-select-arrow-wrap"><div class="fi-select-arrow"></div></div>',
+        checkbox: true,
+        checkboxSelector: 'input[type="checkbox"]',
+        checkboxHtml: '<div class="fi-check"></div>',
 
-    file : true,
-    fileSelector : 'input[type="file"]',
-    fileHtml : '<span>Choose a file...</span><div class="fi-file-button"><div class="fi-file-button-inner">Browse</div></div>'
+        radio: true,
+        radioSelector: 'input[type="radio"]',
+        radioHtml: '<div class="fi-check"></div>',
 
-};
+        select: true,
+        selectSelector: 'select:not([multiple])',
+        selectHtml: '<span></span><div class="fi-select-arrow-wrap"><div class="fi-select-arrow"></div></div>',
 
-})( jQuery );
+        file: true,
+        fileSelector: 'input[type="file"]',
+        fileHtml: '<span>Choose a file...</span><div class="fi-file-button"><div class="fi-file-button-inner ss-icon">&#x1F4CE;</div></div>'
+
+    };
+
+    //set back to the jQuery object for backwards compatibility
+    $.formIt = formIt;
+    return formIt;
+}));
