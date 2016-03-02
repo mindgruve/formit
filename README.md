@@ -80,18 +80,3 @@ Here are the defaults taken directly from the source code.
 ## Examples
 
 For now, see `demos/index.html`.
-
-## Release History
-
-* 2013/06/19 - v0.1.6 - Add grunt task `cssmin` for minified version of css to `css/jquery.formit.min.css` for production use.
-* 2013/05/30 - v0.1.5 - Trigger focus event on checkbox and radio clicks so focus styles are shown.
-    * Add styles for multiple select focus event.
-    * Update docs about mutli-selects and focus events.
-* 2013/05/29 - v0.1.4 - Update select selector to exclude multiple selects.
-    * Add styles for multiple selects.
-* 2013/04/19 - v0.1.3 - Add handling for disabled selects on setup.
-* 2013/04/04 - v0.1.2 - Enhancements for power users that navigate forms with their keyboard.
-    * Fire change handler on selects on keyup.
-    * Add class `fi-focus` to form elements wrapper that have focus.
-* 2013/03/18 - v0.1.1 - Manually call change handler on selects on set up instead of triggering `change` with jQuery. Update grunt to 0.4.1.
-* 2012/11/16 - v0.1.0 - Initial release.
