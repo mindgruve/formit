@@ -27,6 +27,7 @@
     "test": "grunt qunit",
     "build-js": "grunt"
   },
+  "main": "dist/jquery.formit.js",
   "dependencies": {
 	  "jquery": "~1.7.0"
   },
