@@ -1,8 +1,15 @@
 # formIt Changelog
 
+## Version 3.3.2
+
+- Update to latest dev dependencies.
+- Refactor due to jshint suggestions. Cleaner code!
+- Fix bad version number in 3.3.1
+- Shrinkwrap front end dependencies
+
 ## Version 3.3.1
 
-- Fix incorrect version numbers and update changelo1
+- Fix incorrect version numbers and update changelog
 
 ## Version 3.3.0
 

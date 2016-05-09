@@ -1,4 +1,4 @@
-/* formIt - v3.2.0 - 2016-03-01
+/* formIt - v3.3.2 - 2016-05-09
  * https://github.com/mindgruve/formit
  * Copyright (c) 2016 Mindgruve;
  * Licensed MIT
@@ -21,10 +21,16 @@
     var
         lastOptions,
         types = {},
-        methods = {},
         internal = {},
+        methods = {},
 
     // Helpers
+
+        focusBlurHandler = function (e) {
+            var prefix = e.type === 'focus' ? 'add' : 'remove';
+            $(this).parent()[ prefix + 'Class' ]('fi-focus');
+        },
+		
         checkboxRadioSetUp = function ($input, $el) {
             var isChecked = $input.prop('checked'),
                 isDisabled = $input.attr('disabled'),
@@ -51,11 +57,6 @@
 
         checkboxRadioRemove = function ($input) {
             $input.off('.formit').parent().remove();
-        },
-
-        focusBlurHandler = function (e) {
-            var prefix = e.type === 'focus' ? 'add' : 'remove';
-            $(this).parent()[ prefix + 'Class' ]('fi-focus');
         },
 
         selectSetUp = function ($input, $el) {
@@ -131,7 +132,7 @@
         }
     };
 
-// File
+	// File
     types.file = {
         changeHandler: function () {
             var $file = $(this);
@@ -157,6 +158,33 @@
         }
     };
 
+    internal.initType = function ($els, typeName, type, html) {
+        $els.each(function () {
+            var $input = $(this), $el;
+            if ($input.hasClass('fi-styled')) {
+                return;
+            }
+            var $html = $(html);
+            if (typeName === 'radio' || typeName === 'checkbox') {
+                $html.first().addClass('fi-check');
+            }
+            $el = $('<div />', { 'class': 'fi-' + typeName }).append($html);
+            type.setUp($input.addClass('fi-styled'), $el);
+        });
+    };
+
+    internal.removeType = function ($els, type) {
+        $els.each(function () {
+            var $input = $(this);
+            if (!$input.hasClass('fi-styled')) {
+                return;
+            }
+            if (type.remove) {
+                type.remove($input);
+            }
+        });
+    };
+
     // Main initialize function
     methods.init = function (options) {
         options = $.extend({}, formIt.defaults, options);
@@ -173,22 +201,7 @@
         lastOptions = options;
     };
 
-    internal.initType = function ($els, typeName, type, html) {
-        $els.each(function () {
-            var $input = $(this), $el;
-            if ($input.hasClass('fi-styled')) {
-                return;
-            }
-            var $html = $(html);
-            if (typeName === 'radio' || typeName === 'checkbox') {
-                $html.first().addClass('fi-check');
-            }
-            $el = $('<div />', { 'class': 'fi-' + typeName }).append($html);
-            type.setUp($input.addClass('fi-styled'), $el);
-        });
-    };
-
-// Remove elements
+	// Remove elements
     methods.remove = function ($context) {
         if (!lastOptions) {
             return;
@@ -210,19 +223,8 @@
         }
     };
 
-    internal.removeType = function ($els, type) {
-        $els.each(function () {
-            var $input = $(this);
-            if (!$input.hasClass('fi-styled')) {
-                return;
-            }
-            if (type.remove) {
-                type.remove($input);
-            }
-        });
-    };
-
-    function formIt (method) {
+	//Don't know why but, jshint errors out here. it thinks formIt is used earlier. methods.init has the only reference to formIt before this, but it's a method so jshint is wrong. best solution is to refactor this module to be less scattered. code smell is REAL!
+    function formIt (method) {//jshint ignore:line
         if (methods[ method ]) {
             methods[ method ].apply(this, Array.prototype.slice.call(arguments, 1));
         } else if (typeof method === 'object' || !method) {

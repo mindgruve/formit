@@ -2,7 +2,7 @@
   "name": "formit",
   "title": "formIt",
   "description": "A jQuery plugin for custom form elements.",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "homepage": "https://github.com/mindgruve/formit",
   "contributors": [
     {
@@ -29,15 +29,15 @@
   },
   "main": "dist/jquery.formit.js",
   "dependencies": {
-	  "jquery": "~1.7.0"
+    "jquery": "~1.7.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-cli": "^0.1.13",
-    "grunt-contrib-concat": "~0.1.0",
-    "grunt-contrib-cssmin": "~0.6.1",
-    "grunt-contrib-jshint": "~0.1.0",
-    "grunt-contrib-qunit": "~0.1.0",
-    "grunt-contrib-uglify": "~0.1.0"
+    "grunt": "^1.0.1",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.1",
+    "grunt-contrib-jshint": "^1.0.0",
+    "grunt-contrib-qunit": "^1.2.0",
+    "grunt-contrib-uglify": "^1.0.1"
   }
 }
