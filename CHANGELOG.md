@@ -1,11 +1,20 @@
 # formIt Changelog
 
+## Version 3.3.1
+
+- Fix incorrect version numbers and update changelo1
+
+## Version 3.3.0
+
+- Add dist file to properly be referenced in package.json for webpack support and add clarity for people who randomly find our library
+
+
 ## Version 3.2.0
 
 - Add support for updateText in select & file controls
 
 
-## Shenanigans
+## !!! Shenanigans !!!
 
 What happened between the next version and the last? We may never know.
 
